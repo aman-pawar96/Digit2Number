@@ -27,10 +27,13 @@ def Digit2Number(NonDecimalValue,DecimalValue):
     if int(DecimalValue)>99:
         return("Decimal Value cannot be greater than 99, Invalid Input")
     else:
-        if len(DecimalValue)==1:
-            DecimalWord=OneDigits[int(DecimalValue-1)]+ " Paise"
+        if int(DecimalValue)==0:
+            DecimalWord="Zero Paise"
         else:
-            DecimalWord=twodigitreturn(int(DecimalValue))+ " Paise"
+            if len(DecimalValue)==1:
+                DecimalWord=OneDigits[int(DecimalValue-1)]+ " Paise"
+            else:
+                DecimalWord=twodigitreturn(int(DecimalValue))+ " Paise"
         if len(NonDecimalValue)==1:
             NonDecimalWord=OneDigits[int(NonDecimalValue)-1]+" Rupee"
         if len(NonDecimalValue)==2:
@@ -53,7 +56,10 @@ def CheckNumber(Numbers):
     elif Check<0:
         return("Number Below Min range (0-999999.99), Try with number in range")
     else:
-        Numbers=Numbers.split(".")
+        if "." in Numbers:
+            Numbers=Numbers.split(".")
+        else:
+            Numbers=[Numbers,"0"]
         ReturnValue=Digit2Number(Numbers[0],Numbers[1])
         return(ReturnValue)
 
